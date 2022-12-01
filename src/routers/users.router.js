@@ -12,6 +12,8 @@ const auth = require('../middlewares/auth');
 
 router.get('/user', auth, UserController.getUser);
 
+router.get('/user/:id', auth, UserController.getByIdUser);
+
 router.post('/login', LoginController);
 
 router.post('/user', validateName, validatePassword, validateEmail, UserController.createUser);
