@@ -48,9 +48,13 @@ const createPost = async (title, content, categoryIds, id) => {
   return post;
 };
 
+const deletPost = (id) => BlogPost.destroy({ where: { id } });
+
 module.exports = {
   createPost,
   getPost,
   getByIdpost,
   updatedPost,
+  deletPost,
+  getById,
 };
