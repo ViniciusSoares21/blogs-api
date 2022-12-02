@@ -65,6 +65,13 @@ const getPost = async (_req, res) => {
   }
 };
 
+const searchPostTitle = async (req, res) => {
+  const { q } = req.query;
+  const result = await BlogPostService.searchPostTitle(q);
+
+  return res.status(200).json(result);
+};
+
 const deletPost = async (req, res) => {
   try {
     const existPost = await BlogPostService.getById(req.params.id);
@@ -90,4 +97,5 @@ module.exports = {
   getByIdpost,
   updatedPost,
   deletPost,
+  searchPostTitle,
 };
