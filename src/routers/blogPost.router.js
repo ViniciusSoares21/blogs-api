@@ -12,4 +12,6 @@ router.post('/post', auth, validatePost, BlogPost.createPost);
 
 router.get('/post', auth, BlogPost.getPost);
 
+router.get('/post/:id', auth, BlogPost.getByIdpost);
+
 module.exports = router;
