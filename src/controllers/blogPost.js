@@ -14,6 +14,27 @@ const getByIdpost = async (req, res) => {
   }
 };
 
+const updatedPost = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+
+    const { id } = req.params;
+
+    if (Number(req.use.id) !== Number(id)) {
+      return res.status(401).json({ message: 'Unauthorized user' });
+    }
+
+    if (!title || !content) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+    }
+
+    const upPost = await BlogPostService.updatedPost(title, content, id);
+    res.status(200).json(upPost);
+  } catch (err) {
+    res.status(500).json({ message: 'Erro interno', error: err.message });
+  }
+};
+
 const createPost = async (req, res) => {
   try {
     const { title, content, categoryIds } = req.body;
@@ -48,4 +69,5 @@ module.exports = {
   createPost,
   getPost,
   getByIdpost,
+  updatedPost,
 };
