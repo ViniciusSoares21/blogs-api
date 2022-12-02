@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, User, Category } = require('../models');
 
 const getById = (id) => BlogPost.findOne({ where: { id } });
@@ -18,6 +19,38 @@ const getPost = async () => {
   });
 
   return post;
+};
+
+/* const searchPostTitle = async (q) => {
+  const post = await BlogPost.findAll({ [Op.and]: [{ title: { where: { [Op.like]: q } } }, 
+    { content: { where: { [Op.like]: q } } }],
+    include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+  { model: Category, as: 'categories', through: { attributes: [] } }],
+  });
+
+  return post;
+}; */
+
+const searchPostTitle = async (q) => {
+  const postTitle = await getPost();
+
+  if (!q) {
+    return postTitle;
+  }
+
+  const filterPostTitle = postTitle.filter((elem) => elem.title.toLowerCase()
+    .includes(q.toLowerCase()));
+
+  const filterContent = postTitle.filter((elem) => elem.content.toLowerCase()
+  .includes(q.toLowerCase()));
+
+  if (filterPostTitle.length === 0) {
+    return filterContent;
+  }
+
+  if (filterContent.length === 0) {
+    return filterPostTitle;
+  }
 };
 
 const updatedPost = async (title, content, id) => {
@@ -57,4 +90,5 @@ module.exports = {
   updatedPost,
   deletPost,
   getById,
+  searchPostTitle,
 };
