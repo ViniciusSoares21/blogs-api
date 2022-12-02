@@ -18,4 +18,6 @@ router.post('/login', LoginController);
 
 router.post('/user', validateName, validatePassword, validateEmail, UserController.createUser);
 
+router.delete('/user/me', auth, UserController.deletUser);
+
 module.exports = router;
