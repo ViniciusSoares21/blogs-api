@@ -1,7 +1,15 @@
-const snakeize = require('snakeize');
-const { BlogPost, PostCategory } = require('../models');
+const { BlogPost, PostCategory, User, Category } = require('../models');
 
 const getById = (id) => BlogPost.findOne({ where: { id } });
+
+const getPost = async () => {
+  const post = await BlogPost.findAll({
+    include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+  { model: Category, as: 'categories', through: { attributes: [] } }],
+  });
+
+  return post;
+};
 
 const createPost = async (title, content, categoryIds, id) => {
   const obj = {
@@ -15,7 +23,7 @@ const createPost = async (title, content, categoryIds, id) => {
   const newPost = await BlogPost.create(obj);
 
   await categoryIds.map((category) => PostCategory
-    .create(snakeize({ postId: newPost.id, categoryId: category })));
+    .create({ postId: newPost.id, categoryId: category }));
 
   const post = await getById(newPost.id);
 
@@ -24,4 +32,5 @@ const createPost = async (title, content, categoryIds, id) => {
 
 module.exports = {
   createPost,
+  getPost,
 };
