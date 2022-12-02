@@ -22,6 +22,17 @@ const createPost = async (req, res) => {
   }
 };
 
+const getPost = async (_req, res) => {
+  try {
+    const email = 'lewishamilton@gmail.com';
+    const posts = await BlogPostService.getPost(email);
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ message: 'Erro interno', error: err.message });
+  }
+};
+
 module.exports = {
   createPost,
+  getPost,
 };
