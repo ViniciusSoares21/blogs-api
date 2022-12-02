@@ -16,4 +16,6 @@ router.get('/post/:id', auth, BlogPost.getByIdpost);
 
 router.put('/post/:id', auth, BlogPost.updatedPost);
 
+router.delete('/post/:id', auth, BlogPost.deletPost);
+
 module.exports = router;
