@@ -10,4 +10,6 @@ const validatePost = require('../middlewares/validatePost');
 
 router.post('/post', auth, validatePost, BlogPost.createPost);
 
+router.get('/post', auth, BlogPost.getPost);
+
 module.exports = router;
