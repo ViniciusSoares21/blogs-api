@@ -65,9 +65,29 @@ const getPost = async (_req, res) => {
   }
 };
 
+const deletPost = async (req, res) => {
+  try {
+    const existPost = await BlogPostService.getById(req.params.id);
+
+    if (existPost === null) {
+      return res.status(404).json({ message: 'Post does not exist' });
+      }
+
+    if (Number(req.use.id) !== Number(existPost.userId)) {
+      return res.status(401).json({ message: 'Unauthorized user' });
+    }   
+
+    await BlogPostService.deletPost(req.params.id);
+    res.status(204).json();
+  } catch (err) {
+    res.status(500).json({ message: 'Erro interno', error: err.message });
+  }
+};
+
 module.exports = {
   createPost,
   getPost,
   getByIdpost,
   updatedPost,
+  deletPost,
 };
