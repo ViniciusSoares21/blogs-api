@@ -14,4 +14,6 @@ router.get('/post', auth, BlogPost.getPost);
 
 router.get('/post/:id', auth, BlogPost.getByIdpost);
 
+router.put('/post/:id', auth, BlogPost.updatedPost);
+
 module.exports = router;
