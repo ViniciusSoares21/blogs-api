@@ -1,4 +1,4 @@
-// const { Op } = require('sequelize');
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, User, Category } = require('../models');
 
 const getById = (id) => BlogPost.findOne({ where: { id } });
@@ -21,16 +21,18 @@ const getPost = async () => {
   return post;
 };
 
-/* const searchPostTitle = async (q) => {
-  const post = await BlogPost.findAll({ [Op.and]: [{ title: { where: { [Op.like]: q } } }, 
-    { content: { where: { [Op.like]: q } } }],
+const searchPostTitle = async (q) => {
+  const post = await BlogPost.findAll({ where: { [Op.or]: {
+     title: { [Op.substring]: q }, 
+     content: { [Op.substring]: q } } },
     include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
   { model: Category, as: 'categories', through: { attributes: [] } }],
   });
 
   return post;
-}; */
+}; 
 
+/* 
 const searchPostTitle = async (q) => {
   const postTitle = await getPost();
 
@@ -52,7 +54,7 @@ const searchPostTitle = async (q) => {
     return filterPostTitle;
   }
 };
-
+ */
 const updatedPost = async (title, content, id) => {
   await BlogPost.update({ title, content }, {
     where: { id },
