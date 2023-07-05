@@ -1,7 +1,7 @@
 # Blogs API
 
 ## Descrição 
-:construction: Em andamento :construction:
+Esse projeto foi desenvolvido para a criação de uma API com o banco de dados Mysql, destinados para a criação de um blog. Durante o desenvolvimento, foi criada uma aplicação em Node.js utilizando o pacote sequelize para implementar as funcionalidades de criação, (CRUD) de posts, e login. Foram criados endpoints que estão conectados ao banco de dados, seguindo os princípios do REST. Para criar um post, é preciso fornecer dados de usuário e realizar o login, o que reforça a conexão entre usuário e post. Além disso, foram usadas categorias para classificar os posts, estabelecendo ligações entre posts e categorias, assim como entre categorias e posts.
 
 ## Tecnologias e Ferramentas
 
