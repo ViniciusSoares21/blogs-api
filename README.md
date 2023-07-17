@@ -671,7 +671,7 @@ Se quiser popular o banco de dados rode o comando
 </details>
 
 ## Diagrama ER
- <img src="https://github.com/tryber/sd-023-b-project-blogs-api/blob/master/public/der.png?raw=true" alt="diagrama er" />
+![DER](./diagrama%20ER.png)
  
 ## Criado por [Vinicius Soares](https://www.linkedin.com/in/vinicius-soares21/)
     
